@@ -58,7 +58,7 @@ export default function Controls() {
 
   const startRecording = async () => {
     try {
-      const recorder = new AudioRecorder({ maxDurationMs: 90000 });
+      const recorder = new AudioRecorder({ maxDurationMs: 300000 });
       recorderRef.current = recorder;
 
       const stream = await recorder.start(
@@ -68,7 +68,7 @@ export default function Controls() {
           setIsRecording(false);
         },
         () => {
-          showToast("Maximum recording time (90s) reached", "info");
+          showToast("Maximum recording time (5 minutes) reached", "info");
         }
       );
 
@@ -259,6 +259,11 @@ export default function Controls() {
         "Are you sure you want to end this interview session? The transcript will remain available for export."
       )
     ) {
+      if (isRecording) {
+        stopRecording();
+      }
+      setRecordingTime(0);
+      setAudioLevel(0);
       endInterview();
       setTextInput("");
       setTranscriptInput("");
@@ -389,7 +394,7 @@ export default function Controls() {
                 <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
                 <span className="text-sm text-red-400 font-mono font-semibold">
                   {Math.floor(recordingTime / 60)}:
-                  {(recordingTime % 60).toString().padStart(2, "0")} / 1:30
+                  {(recordingTime % 60).toString().padStart(2, "0")} / 5:00
                 </span>
               </div>
             )}

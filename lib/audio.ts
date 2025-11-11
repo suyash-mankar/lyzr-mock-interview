@@ -19,7 +19,7 @@ export class AudioRecorder {
   private timeoutId?: NodeJS.Timeout;
 
   constructor(config: RecorderConfig = {}) {
-    this.maxDuration = config.maxDurationMs || 90000; // 90 seconds default
+    this.maxDuration = config.maxDurationMs || 300000; // 5 minutes default
   }
 
   async start(

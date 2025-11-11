@@ -138,9 +138,9 @@ export default function Chat() {
   }, [messages, isLoading]);
 
   return (
-    <div 
+    <div
       ref={chatContainerRef}
-      className="flex-1 overflow-y-auto p-6 space-y-2 scroll-smooth"
+      className="h-full overflow-y-auto p-6 space-y-2 scroll-smooth"
     >
       {messages.length === 0 && !isLoading && (
         <div className="flex items-center justify-center h-full">

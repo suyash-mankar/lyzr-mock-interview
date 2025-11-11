@@ -9,13 +9,13 @@ import SettingsDialog from "@/components/SettingsDialog";
 import Toast from "@/components/Toast";
 
 function InterviewStudioContent() {
-  const { 
-    elapsedTime, 
-    sessionId, 
-    addMessage, 
-    showToast, 
+  const {
+    elapsedTime,
+    sessionId,
+    addMessage,
+    showToast,
     startInterview,
-    setIsGeneratingTTS 
+    setIsGeneratingTTS,
   } = useSession();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -23,12 +23,13 @@ function InterviewStudioContent() {
     if (confirm("Start a new mock interview session?")) {
       // Start the interview (timer starts here)
       startInterview();
-      
+
       // Show loading state
       setIsGeneratingTTS(true);
-      
-      const welcomeText = "Hi Suyash, I'm Siva — thanks for joining. Here's how this will work: I'll ask you 6-8 focused questions relevant to the Product Manager role at Lyzr. After each answer, I'll give you brief, actionable feedback, a competency score, and a suggestion for improvement or a quick follow-up. We'll then move on to the next question. Let's get started. First, drawing from your experience as an Engineering Lead and co-founder, can you walk me through a recent product decision where you had to balance competing customer needs with technical feasibility? Please explain the specific trade-offs you made and how you prioritized what to build.";
-      
+
+      const welcomeText =
+        "Hi Suyash, I'm Siva — thanks for joining. Here's how this will work: I'll ask you 6-8 focused questions relevant to the Product Manager role at Lyzr. After each answer, I'll give you brief, actionable feedback, a competency score, and a suggestion for improvement or a quick follow-up. We'll then move on to the next question. Let's get started. First, drawing from your experience as an Engineering Lead and co-founder, can you walk me through a recent product decision where you had to balance competing customer needs with technical feasibility? Please explain the specific trade-offs you made and how you prioritized what to build.";
+
       // Generate TTS for welcome message
       let audioUrl: string | undefined;
       try {
@@ -96,7 +97,9 @@ function InterviewStudioContent() {
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-background/50 backdrop-blur-sm rounded-xl border border-border/50">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
-              <span className="text-sm font-medium text-text-primary">Suyash</span>
+              <span className="text-sm font-medium text-text-primary">
+                Suyash
+              </span>
             </div>
 
             <button
@@ -138,21 +141,33 @@ function InterviewStudioContent() {
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto flex flex-col lg:flex-row gap-6 p-6 overflow-hidden">
         {/* Left Column - Chat */}
-        <div className="flex-1 lg:w-[60%] gradient-card rounded-3xl shadow-2xl border border-border/50 flex flex-col overflow-hidden backdrop-blur-sm">
+        <div className="flex-1 lg:w-[60%] gradient-card rounded-3xl shadow-2xl border border-border/50 flex flex-col overflow-hidden backdrop-blur-sm h-[70vh]">
           <div className="px-6 py-4 border-b border-border/50 flex items-center justify-between bg-background/30 backdrop-blur-sm">
             <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
-              <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              <svg
+                className="w-4 h-4 text-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                />
               </svg>
               Transcript
             </h2>
             <Timer elapsedSeconds={elapsedTime} maxSeconds={1800} />
           </div>
-          <Chat />
+          <div className="flex-1 overflow-hidden">
+            <Chat />
+          </div>
         </div>
 
         {/* Right Column - Controls */}
-        <div className="lg:w-[40%] gradient-card rounded-3xl shadow-2xl border border-border/50 overflow-y-auto backdrop-blur-sm">
+        <div className="lg:w-[40%] gradient-card rounded-3xl shadow-2xl border border-border/50 overflow-y-auto backdrop-blur-sm h-[70vh]">
           <Controls />
         </div>
       </main>
@@ -162,16 +177,27 @@ function InterviewStudioContent() {
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-xs text-text-secondary flex items-center justify-center gap-2 flex-wrap">
             <span className="flex items-center gap-1">
-              <svg className="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+              <svg
+                className="w-3 h-3 text-green-400"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clipRule="evenodd"
+                />
               </svg>
               Secure Mock Interview
             </span>
             <span>•</span>
-            <span suppressHydrationWarning>Session: {sessionId.slice(0, 8)}...</span>
+            <span suppressHydrationWarning>
+              Session: {sessionId.slice(0, 8)}...
+            </span>
           </p>
           <p className="text-xs text-text-secondary/70 mt-1">
-            Powered by <span className="text-accent font-medium">Lyzr AI</span> & <span className="text-accent font-medium">OpenAI</span>
+            Powered by <span className="text-accent font-medium">Lyzr AI</span>{" "}
+            & <span className="text-accent font-medium">OpenAI</span>
           </p>
         </div>
       </footer>
